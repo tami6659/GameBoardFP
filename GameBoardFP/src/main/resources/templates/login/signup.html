@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ログイン機能</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/login/style-signup.css}">
+</head>
+<body>
+	<main>
+		<header id="header">
+			<h1>ゲーム掲示板</h1>
+		</header>
+		<h2>新規会員登録</h2>
+		<h3 th:if="${error}" th:text="${error}"></h3>
+		<form th:action="@{/signup}" method="post" class="signup-form" th:object="${user}">
+			<div>
+				<label> 名前： <input type="text" name="name"
+					class="textbox name" required>
+				</label>
+				<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+			</div>
+			<div>
+				<label> パスワード： <input type="password" name="pass"
+					class="textbox pass" required>
+				</label>
+				<p th:if="${#fields.hasErrors('pass')}" th:errors="*{pass}"></p>
+			</div>
+			<input type="submit" value="新規登録" id=btn>
+		</form>
+		<p class="loginform">
+			登録済みの方は<a href="/GameBoardFP/login" class="loginbtn">こちら</a>
+		</p>
+		<br>
+		<p th:text="${ans}"></p>
+	</main>
+</body>
+</html>

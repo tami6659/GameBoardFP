@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ゲーム掲示板</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/admin/admin.css}">
+</head>
+<body>
+	<header id="header">
+		<h1>ゲーム掲示板</h1>
+	</header>
+	<main>
+		<h2>スレッド削除</h2>
+
+		<!-- スレッド一覧表示 -->
+		<table th:if="${thread_list.size() >= 1}" id="table" border="1">
+			<thead>
+				<tr>
+					<th>スレッドタイトル</th>
+					<th>ゲーム</th>
+					<th>ジャンル</th>
+					<th>立ち上げ主</th>
+					<th>日付</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="thread:${thread_list}" th:object="${thread}">
+					<td th:text="${thread.title}"></td>
+					<td th:text="${thread.game}"></td>
+					<td th:text="${thread.genre}"></td>
+					<td th:text="${thread.user}"></td>
+					<td th:text="${thread.date}"></td>
+					<td>
+						<form th:action="@{/thread_delete}" method="post" onSubmit="return check()">
+							<input type="hidden" name="t_id" th:value="${thread.id}">
+							<input type="submit" name="削除" value="削除" id="delete_btn">
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+
+		<br> <a href="/GameBoardFP" id=btn>メインへ</a>
+	</main>
+</body>
+<script type="text/javascript">
+	function check() {
+
+		if (window.confirm('本当に削除してもよろしいですか？')) { //確認ダイアログを表示
+			return true;
+		} else {
+			return false; //送信を中止
+
+		}
+
+	}
+</script>
+</html>

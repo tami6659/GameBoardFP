@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ゲーム掲示板</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/board/style-history.css}">
+</head>
+<body>
+	<header id="header">
+		<h1>ゲーム掲示板</h1>
+	</header>
+	<main>
+
+		<h2>あなたの書き込み履歴</h2>
+		<div class="w_history" id="table">
+			<!-- 書き込み情報 -->
+			<table th:if="${w_history_list.size() >= 1}" border="1">
+				<thead>
+					<tr>
+						<th>スレッドタイトル</th>
+						<th>ゲーム</th>
+						<th>ジャンル</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="w_history:${w_history_list}" th:object="${w_history}">
+						<td th:text="${w_history.t_title}"></td>
+						<td th:text="${w_history.t_game}"></td>
+						<td th:text="${w_history.t_genre}"></td>
+						<td>
+							<form th:action="@{/board}" method="get">
+								<input type="hidden" name="t_id" th:value="${w_history.t_id}">
+								<input type="submit" name="閲覧" value="閲覧" id="view_btn">
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- 書き込み件数 -->
+			<table  th:if="${w_history_list.size() >= 1}" border="1">
+				<thead>
+					<tr>
+					<th>書き込み件数</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="w_h_c:${w_history_count}" th:object="${w_h_c}">
+						<td th:text="${w_h_c}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- いいね総数 -->
+			<table  th:if="${w_history_list.size() >= 1}" border="1">
+				<thead>
+					<tr>
+					<th>いいね総数</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="a_good:${all_good}" th:object="${a_good}">
+						<td th:text="${a_good}"></td>
+					</tr>
+				</tbody>
+			</table>	
+		</div>
+		<br>
+		<a href="/GameBoardFP" id=btn>メインへ</a>
+	</main>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ゲーム掲示板</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/board/style-history.css}">
+</head>
+<body>
+	<header id="header">
+		<h1>ゲーム掲示板</h1>
+	</header>
+	<main>
+
+	<h2>あなたのいいね履歴</h2>
+		<table th:if="${history_list.size() >= 1}" id="table" border="1">
+			<thead>
+				<tr>
+					<th>スレッドタイトル</th>
+					<th>ゲーム</th>
+					<th>ジャンル</th>
+					<th>日付</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="history:${history_list}" th:object="${history}">
+					<td th:text="${history.t_title}"></td>
+					<td th:text="${history.t_game}"></td>
+					<td th:text="${history.t_genre}"></td>
+					<td th:text="${history.date}"></td>
+					<td>
+						<form th:action="@{/board}" method="get">
+							<input type="hidden" name="t_id" th:value="${history.t_id}">
+							<input type="submit" name="閲覧" value="閲覧" id="view_btn">
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<a href="/GameBoardFP" id=btn>メインへ</a>
+	</main>
+</body>
+</html>

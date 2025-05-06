@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ログイン機能</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/login/style-login.css}">
+</head>
+<body>
+	<header id="header">
+		<h1>ゲーム掲示板</h1>
+	</header>
+	<h2 th:if="${UserName}!=null" th:text="'ようこそ'+${UserName}+'さん！'"></h2>
+	<a href="/GameBoardFP" id=btn>メイン画面</a>
+</body>
+</html>
