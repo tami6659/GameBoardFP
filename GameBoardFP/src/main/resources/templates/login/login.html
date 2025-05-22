@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ログイン機能</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/login/style-login.css}">
+</head>
+<body>
+	<main>
+		<header id="header">
+			<h1>ゲーム掲示板</h1>
+		</header>
+		<h2>ログインページ</h2>
+		<!-- エラーメッセージ -->
+        <p th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null"
+            th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"
+            class="text-danger">
+        </p>
+		<form th:action="@{/answer}" method="post">
+			<div>
+				<label> ユーザー名： <input type="text" name="name" class="textbox"
+					required>
+				</label>
+			</div>
+			<div>
+				<label> パスワード： <input type="password" name="pass"
+					class="textbox" required>
+				</label>
+			</div>
+			<input type="submit" value="ログイン"  id="login_btn">
+		</form>
+		<br><br><a href="/GameBoardFP/signup" id="btn">新規登録</a> <br> <a href="/GameBoardFP" id="btn">メインへ</a> <br>
+	</main>
+</body>
+</html>
